@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeremy Sunico — Resume</title>
+  <style>
+    /* Reset & Global Styles */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #eef2f7;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #0078ff, #00d4ff);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size: 3em; margin-bottom: 10px; animation: fadeInDown 1s ease; }
+    header p { font-size: 1.2em; color: rgba(255,255,255,0.9); animation: fadeInDown 1.2s ease; }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Section Titles */
+    h2 {
+      color: #0078ff;
+      margin-bottom: 20px;
+      display: inline-block;
+      border-bottom: 2px solid #0078ff;
+      padding-bottom: 5px;
+      transition: 0.3s;
+    }
+    h2:hover { color: #005bb5; border-color: #005bb5; }
+
+    /* Personal Info */
+    .personal-info {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .personal-info:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+    .personal-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 30px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    .profile-pic {
+      flex: 0 0 250px; /* Bigger size */
+      border-radius: 0; /* Square shape */
+      overflow: hidden;
+      border: 4px solid #0078ff;
+      transition: transform 0.3s;
+    }
+    .profile-pic img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+    }
+    .profile-pic:hover { transform: scale(1.05); }
+
+    .contact-info {
+      flex: 1;
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .contact-info h2 { margin-bottom: 10px; }
+    .contact-info p { margin-bottom: 8px; }
+    .contact-info:hover { transform: translateY(-5px); }
+
+    .profile-details {
+      text-align: center;
+      max-width: 700px;
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .profile-details h2 { margin-bottom: 15px; }
+    .profile-details p { margin-bottom: 10px; }
+    .profile-details:hover { transform: translateY(-5px); }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+    .skill {
+      background: linear-gradient(135deg, #0078ff, #00d4ff);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 0.95em;
+      font-weight: bold;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .skill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Timeline */
+    .timeline {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+    }
+    .timeline-item { margin-bottom: 25px; opacity: 0; animation: fadeInUp 1s forwards; }
+    .timeline-item h3 { color: #222; margin-bottom: 5px; }
+    .timeline-item span { font-size: 0.9em; color: #555; }
+    .timeline-item p { margin-top: 5px; }
+
+    /* Achievements */
+    .achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .achievement-item {
+      flex: 0 0 200px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .achievement-item img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .achievement-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform 0.3s;
+    }
+    .contact-form:hover { transform: translateY(-5px); }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 100%;
+      font-size: 1em;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #0078ff;
+      box-shadow: 0 0 10px rgba(0,120,255,0.2);
+      outline: none;
+    }
+    .contact-form button {
+      padding: 15px;
+      background: linear-gradient(135deg, #0078ff, #00d4ff);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Lightbox Overlay */
+    #lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0078ff, #00d4ff, #ff6ec7);
+      background-size: 300% 300%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: backgroundGradient 10s ease infinite;
+    }
+    #lightbox-overlay img {
+      max-width: 80%;
+      max-height: 70%;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      transform: scale(0);
+      animation: zoomIn 0.5s forwards;
+    }
+    #lightbox-overlay p {
+      color: white;
+      font-size: 1.2em;
+      margin-top: 15px;
+      text-align: center;
+    }
+    #close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    #close-lightbox:hover { color: #ffeb3b; }
+
+    /* Animations */
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes backgroundGradient {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: white;
+      font-size: 0.9em;
+    }
+
+    /* Responsive */
+    @media(max-width: 800px) {
+      .personal-top { flex-direction: column; text-align: center; }
+      .contact-info { text-align: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Jeremy Sunico</h1>
+    <p>Web Developer | IT Enthusiast | Problem Solver</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Personal Info & Profile -->
+    <section class="personal-info">
+      <div class="personal-top">
+        <div class="profile-pic">
+          <img src="uq0PZZZ4.jpg" alt="Jeremy Sunico">
+        </div>
+        <div class="contact-info">
+          <h2>Contact</h2>
+          <p>Email: jeremy@example.com</p>
+          <p>Phone: +63 912 345 6789</p>
+          <p>Location: Philippines</p>
+        </div>
+      </div>
+      <div class="profile-details">
+        <h2>Profile & Background</h2>
+        <p>A passionate web developer with experience in building modern, responsive websites. Skilled in problem solving, critical thinking, and editing. Always eager to learn and grow professionally.</p>
+        <p><strong>Date of Birth:</strong> August 27, 2006</p>
+        <p><strong>Civil Status:</strong> Single</p>
+        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Citizenship:</strong> Filipino</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Critical Thinking</div>
+        <div class="skill">Editing</div>
+      </div>
+    </section>
+
+    <!-- Educational Attainment -->
+    <section>
+      <h2>Educational Attainment</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>West Visayas State University, Pototan Campus</h3>
+          <span>Brgy. Cau-ayan, Pototan, Iloilo | Y. 2024-Present</span>
+        </div>
+        <div class="timeline-item">
+          <h3>Pototan National Comprehensive High School</h3>
+          <span>Brgy. Cau-ayan, Pototan, Iloilo | S.Y. 2018-2024</span>
+        </div>
+        <div class="timeline-item">
+          <h3>Casalsagan Elementary School</h3>
+          <span>Brgy. Casalsagan, Pototan, Iloilo | Y. 2012-2018</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section>
+      <h2>Achievements</h2>
+      <div class="achievements">
+        <div class="achievement-item">
+          <img src="6d3NaJxn.jpg" alt="WVSU-PC Chess Champion">
+          <p>WVSU-PC Champion in Chess (Men)</p>
+        </div>
+        <div class="achievement-item">
+          <img src="rOpR8HGx.jpg" alt="SoloLearn Certificate">
+          <p>Certificate of Completion - SoloLearn</p>
+        </div>
+        <div class="achievement-item">
+          <img src="9LyjV1iz.jpg" alt="ROTC Escort Appreciation">
+          <p>Certificate of Appreciation - ROTC Escort</p>
+        </div>
+        <div class="achievement-item">
+          <img src="OuwEylfg.jpg" alt="ROTC Completion">
+          <p>Certificate of Completion - ROTC</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section>
+      <h2>Contact Me</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- Lightbox Overlay -->
+  <div id="lightbox-overlay">
+    <span id="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="" alt="Achievement">
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <footer>
+    &copy; 2025 Jeremy Sunico. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Lightbox Script
+    const achievementImages = document.querySelectorAll('.achievement-item img');
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeLightbox = document.getElementById('close-lightbox');
+
+    achievementImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxOverlay.style.display = 'flex';
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.nextElementSibling.textContent;
+      });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+      lightboxOverlay.style.display = 'none';
+    });
+
+    lightboxOverlay.addEventListener('click', (e) => {
+      if(e.target === lightboxOverlay) lightboxOverlay.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
